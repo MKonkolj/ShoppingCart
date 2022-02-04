@@ -128,3 +128,22 @@ h2 + p {
     border-left: 2px solid var(--red);
     width: 100%;
 }
+
+@media (max-width: 992px) {
+    .cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 580px) {
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .car {
+        display: grid;
+        grid-template-columns: 66.66% 1fr;
+        place-items: center;
+    }
+}
