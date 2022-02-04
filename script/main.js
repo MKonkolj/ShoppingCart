@@ -82,4 +82,3 @@ function createDealerElements (Dealer1, Dealer2, Dealer3) {
 
 const cards = document.getElementsByClassName("cards")[0];
 cards.innerHTML = createDealerElements (Dealer1, Dealer2, Dealer3);
-
