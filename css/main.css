@@ -154,6 +154,10 @@ h2 + p {
     width: 100%;
 }
 
+.car-price {
+    color: darkgreen;
+}
+
 @media (max-width: 992px) {
     .cards {
         grid-template-columns: 1fr 1fr;

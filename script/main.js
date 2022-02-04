@@ -1,4 +1,6 @@
-let dealers;
+
+// server response to js
+let dealersJSON;
 
 $.ajax(
 {
@@ -8,54 +10,69 @@ $.ajax(
     url: 'https://freepshop.rs/task.php',
     success: function(data)
     {
-        dealers = data;
+        dealersJSON = data;
     }
 });
 
-// Random odabir dealera za naslovnu
-// na klik dugmeta se postavljaju novu dealeri
 
-let [Dealer1, Dealer2, Dealer3] = dealers;
+// set 3 Dealers from JSON
+let [Dealer1, Dealer2, Dealer3] = dealersJSON;
+// array indexes of the picked cars
+let pickedCars = [0, 1, 2];
 
 
-//cars
-// dealers
-let car = dealers[0].automobili[0];
+// takes a Dealer object and picked cars array
+// returns HTML for all picked cars in Dealer object
+function createCarElements (Dealer, pickedCars = [0, 1, 2]) {
+    let carElements = "";
+    for (let i = 0; i < pickedCars.length; i++) {
+        let make = Dealer.automobili[pickedCars[i]].marka;
+        let model = Dealer.automobili[pickedCars[i]].model;
+        let year = Dealer.automobili[pickedCars[i]].godiste;
+        let price = Dealer.automobili[pickedCars[i]].cena;
 
-let dealerCard =
-`<div class="car-dealer">
-<img class="dealer-img" src="./img/car_placeholder.png" alt="Car dealer">
-<h2>${dealers[0].imeAutoPlaca}</h2>
-<p>${dealers[0].adresa}, ${dealers[0].drzava}</p>
-<div class="cars-preview">
-<div>
-<img class="car-img" src="./img/car_placeholder.png" alt="Car">
-<h3>${car.model} ${car.marka}</h3>
-<p>${car.godiste}. godište</p>
-<p>${car.cena} EUR</p>
-<a href="#">Dodaj u korpu</a>
-</div>
-<div>
-<img class="car-img" src="./img/car_placeholder.png" alt="Car">
-<h3>${car.model} ${car.marka}</h3>
-<p>${car.godiste}. godište</p>
-<p>${car.cena} EUR</p>
-<a href="#">Dodaj u korpu</a>
-</div>
-<div>
-<img class="car-img" src="./img/car_placeholder.png" alt="Car">
-<h3>${car.model} ${car.marka}</h3>
-<p>${car.godiste}. godište</p>
-<p>${car.cena} EUR</p>
-<a href="#">Dodaj u korpu</a>
-</div>
-</div>
-</div>`
+        let oneCarElement = 
+        `<!-- CAR -->
+        <div class="car">
+            <img class="car-img" src="./img/car_placeholder.png" alt="car${i+1}">
+            <div>
+                <h3 class="car-model">${make} ${model}</h3>
+                <p class="car-year">${year}</p>
+                <p class="car-price">${price} EUR</p>
+                <a class="car-buy" href="#">Dodaj u korpu</a>
+            </div>
+        </div>
+        <!-- CAR END -->`;
 
-const carDealers = getElementsByClassName("car-dealers")[0];
-for (let i = 0; i<carDealers.length; i++) {
-    carDealers[i].innerHTML = dealerCard;
+        carElements += oneCarElement;
+        // console.log("carElements", carElements);
+    }
+    return carElements;
 }
 
-console.log(carElement);
+function createDealerElements (Dealer1, Dealer2, Dealer3) {
+    let dealerElements = "";
+    for (let i = 0; i < arguments.length; i++) {
+        let carElements = createCarElements(arguments[i], pickedCars = [0, 1, 2]);
+        oneDealerElement = 
+        `<!-- CAR DEALER -->
+        <div class="car-dealer">
+            <img class="dealer-img" src="./img/car-dealer.jpg" alt="Car dealer">
+            <div>
+                <h2>Voonyx</h2>
+                <p>Mifflin, GR</p>
+                <div class="available-cars">
+                    ${carElements}
+                </div>
+            </div>
+        </div>
+        <!-- CAR DEALER END -->`
+
+        dealerElements += oneDealerElement;
+    }
+    return dealerElements;
+}
+
+const cards = document.getElementsByClassName("cards")[0];
+cards.innerHTML = createDealerElements (Dealer1, Dealer2, Dealer3);
 
