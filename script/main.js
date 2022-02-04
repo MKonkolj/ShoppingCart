@@ -17,13 +17,16 @@ $.ajax(
 
 // set 3 Dealers from JSON
 let [Dealer1, Dealer2, Dealer3] = dealersJSON;
+console.log(Dealer1.imeAutoPlaca);
+console.log(Dealer2.imeAutoPlaca);
+console.log(Dealer3.imeAutoPlaca);
 // array indexes of the picked cars
 let pickedCars = [0, 1, 2];
 
 
 // takes a Dealer object and picked cars array
 // returns HTML for all picked cars in Dealer object
-function createCarElements (Dealer, pickedCars = [0, 1, 2]) {
+function createCarElements (Dealer, pickedCars) {
     let carElements = "";
     for (let i = 0; i < pickedCars.length; i++) {
         let make = Dealer.automobili[pickedCars[i]].marka;
@@ -36,7 +39,7 @@ function createCarElements (Dealer, pickedCars = [0, 1, 2]) {
         <div class="car">
             <img class="car-img" src="./img/car_placeholder.png" alt="car${i+1}">
             <div>
-                <h3 class="car-model">${make} ${model}</h3>
+                <h3 class="car-model">${make}<br>${model}</h3>
                 <p class="car-year">${year}</p>
                 <p class="car-price">${price} EUR</p>
                 <a class="car-buy" href="#">Dodaj u korpu</a>
@@ -53,14 +56,18 @@ function createCarElements (Dealer, pickedCars = [0, 1, 2]) {
 function createDealerElements (Dealer1, Dealer2, Dealer3) {
     let dealerElements = "";
     for (let i = 0; i < arguments.length; i++) {
-        let carElements = createCarElements(arguments[i], pickedCars = [0, 1, 2]);
+        let name = arguments[i].imeAutoPlaca;
+        let address = arguments[i].adresa;
+        let state = arguments[i].drzava;
+
+        let carElements = createCarElements(arguments[i], pickedCars);
         oneDealerElement = 
         `<!-- CAR DEALER -->
         <div class="car-dealer">
             <img class="dealer-img" src="./img/car-dealer.jpg" alt="Car dealer">
             <div>
-                <h2>Voonyx</h2>
-                <p>Mifflin, GR</p>
+                <h2>${name}</h2>
+                <p>${address}, ${state}</p>
                 <div class="available-cars">
                     ${carElements}
                 </div>
