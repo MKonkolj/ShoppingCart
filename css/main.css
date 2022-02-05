@@ -3,6 +3,7 @@
     --dark-grey: #3f4452;
     --red: #c63350;
     --grey: #838b84;
+    --blue: #79c5d5;
 }
 
 html, body {
@@ -145,6 +146,15 @@ h2 + p {
     margin-top: 10px;
     text-decoration: none;
     width: max-content;
+    cursor: pointer;
+}
+
+.car-buy:hover {
+    border-left: 4px dotted;
+}
+
+.car-buy:active {
+    border-color: var(--red);
 }
 
 .car div {
