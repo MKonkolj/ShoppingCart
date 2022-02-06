@@ -84,14 +84,33 @@ let pickedCars = [0, 1, 2];
 
 // ovo bi trebalo da radi na osnovu dužine localStoragea
 const buyBtns = document.querySelectorAll(".car-buy");
+
+// sets the cart to have the right number
 let cartCounter = document.getElementById("cartCounter");
 cartCounter.innerText = localStorage.length;
+
+let boughtCars = [];
 
 function buyItem (dealerIndex, pickedCar){
     let car = dealersJSON[dealerIndex].automobili[pickedCar];
     car.dealerId = dealersJSON[dealerIndex].id;
-    car.dealerName = dealersJSON[dealerIndex].name;
+    car.dealerName = dealersJSON[dealerIndex].imeAutoPlaca;
+    car.amount = 1;
+
     localStorage.setItem(`car-${localStorage.length+1}`, JSON.stringify(car));
     cartCounter.innerText = localStorage.length;
-    console.log(car);
+}
+
+
+//Clear localStorage & reload on logo click
+document.getElementsByClassName("logo")[0].onclick = () => {
+    localStorage.clear();
+    location.reload();
+    cartCounter.innerText = localStorage.length;
+}
+document.getElementsByClassName("logo")[0].onmouseover = function() {
+    this.innerText = "Clear";
+}
+document.getElementsByClassName("logo")[0].onmouseout = function() {
+    this.innerText = "Carify";
 }

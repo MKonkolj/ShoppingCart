@@ -20,6 +20,7 @@ html, body {
     font-size: 24px;
     line-height: 0;
     justify-self: start;
+    cursor: pointer;
 }
 
 .cart a {
@@ -166,6 +167,103 @@ h2 + p {
 
 .car-price {
     color: darkgreen;
+}
+
+/* cartpage */
+.cart-display {
+    padding: 30px;
+}
+.item {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    margin: 30px;
+    padding: 20px;
+    box-shadow: 0 0 8px -2px var(--grey);
+    border-radius: 20px;
+}
+
+.items-count {
+    font-family: 'Pacifico', cursive;
+    font-size: 24px;
+    color: var(--red);
+}
+
+.item-car {
+    display: grid;
+    grid-template-columns: 50px 120px 1fr;
+    align-items: center;
+}
+
+.item-car img {
+    justify-self: end;
+    margin-inline: 10px;
+}
+
+.item-car div {
+    border-left: 2px solid var(--red);
+    padding-left: 10px;
+}
+
+.item-tools {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+}
+
+.item-tools * {
+    margin-left: 20px;
+}
+
+.bin-icon {
+    height: 20px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+.input-amount {
+    width: 40px;
+    padding: 2px 0 2px 12px;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 14px;
+    border: 1px solid var(--grey);
+}
+
+.empty-cart {
+    text-align: center;
+    font-size: 21px;
+    color: var(--red);
+}
+
+.total-sum {
+    width: 80%;
+    text-align: right;
+    border-top: 2px dotted var(--dark-grey);
+    color: var(--dark-grey);
+    margin: 0 auto;
+}
+
+.order-button {
+    background-color: var(--red);
+    color: var(--off-white);
+    padding: 12px 30px;
+    border-radius: 16px;
+    text-decoration: none;
+    display: block;
+    width: 10%;
+    text-align: center;
+    margin-left: auto;
+    margin-bottom: 100px;
+}
+
+.sum {
+    font-size: 26px;
+}
+
+.total-sum p,
+.sum {
+    margin: 6px;
+    padding: 0;
 }
 
 @media (max-width: 992px) {
