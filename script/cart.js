@@ -90,18 +90,3 @@ function setTotalPrice () {
     }
     document.getElementById("orderSum").innerText = totalPrice + " EUR";
 }
-
-
-
-//Clear localStorage & reload on logo click
-document.getElementsByClassName("logo")[0].onclick = () => {
-    localStorage.clear();
-    location.reload();
-    cartCounter.innerText = localStorage.length;
-}
-document.getElementsByClassName("logo")[0].onmouseover = function() {
-    this.innerText = "Clear";
-}
-document.getElementsByClassName("logo")[0].onmouseout = function() {
-    this.innerText = "Carify";
-}

@@ -100,17 +100,3 @@ function buyItem (dealerIndex, pickedCar){
     localStorage.setItem(`car-${localStorage.length+1}`, JSON.stringify(car));
     cartCounter.innerText = localStorage.length;
 }
-
-
-//Clear localStorage & reload on logo click
-document.getElementsByClassName("logo")[0].onclick = () => {
-    localStorage.clear();
-    location.reload();
-    cartCounter.innerText = localStorage.length;
-}
-document.getElementsByClassName("logo")[0].onmouseover = function() {
-    this.innerText = "Clear";
-}
-document.getElementsByClassName("logo")[0].onmouseout = function() {
-    this.innerText = "Carify";
-}
