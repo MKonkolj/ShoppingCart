@@ -1,4 +1,4 @@
-// server response to js
+// server response to js objects
 let dealersJSON;
 $.ajax(
 {
@@ -14,12 +14,8 @@ $.ajax(
 
 // set 3 Dealers from JSON
 let [Dealer1, Dealer2, Dealer3] = dealersJSON;
-
 let pickedCars = [0, 1, 2];
 
-// console.log(Dealer1.imeAutoPlaca);
-// console.log(Dealer2.imeAutoPlaca);
-// console.log(Dealer3.imeAutoPlaca);
 
 // function creates and places dealer HTML elements with 3 cars
 (function setElements() {
@@ -89,6 +85,8 @@ const buyBtns = document.querySelectorAll(".car-buy");
 let cartCounter = document.getElementById("cartCounter");
 cartCounter.innerText = localStorage.length;
 
+
+// add bought car to localStorage
 let boughtCars = [];
 let carIndexCounter = 1;
 

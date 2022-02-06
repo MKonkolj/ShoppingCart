@@ -1,9 +1,7 @@
-// global variables
 let cartItems = [];
 const cartDisplay = document.getElementsByClassName("cart-display")[0];
 
 // GET CART ITEMS FROM LOCAL STORAGE
-
 for (let i = 0; i < localStorage.length; i++) {
     let currentCar = "car-"+ (i+1);
     if (localStorage.getItem(currentCar) !== null) {
@@ -15,7 +13,7 @@ for (let i = 0; i < localStorage.length; i++) {
 let cartCounter = document.getElementById("cartCounter");
 cartCounter.innerText = localStorage.length;
 
-// empty cart text
+// is the cart is empty display text and remove order button
 function emptyCartCheck(){
     if (cartItems.length == 0) {
         cartDisplay.innerHTML = '<div class="empty-cart">Vaša korpa je prazna.</div>';
@@ -72,6 +70,7 @@ function removeCartItem(carIndex, position) {
         }
     }
     
+    cartCounter.innerText = localStorage.length;
     emptyCartCheck();
     setCartElements();
 }
