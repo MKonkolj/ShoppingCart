@@ -1,7 +1,6 @@
 // global variables
 let cartItems = [];
 const cartDisplay = document.getElementsByClassName("cart-display")[0];
-let removeCounter = 1;
 
 // GET CART ITEMS FROM LOCAL STORAGE
 
@@ -20,6 +19,7 @@ cartCounter.innerText = localStorage.length;
 function emptyCartCheck(){
     if (cartItems.length == 0) {
         cartDisplay.innerHTML = '<div class="empty-cart">Vaša korpa je prazna.</div>';
+        document.getElementsByClassName("total-sum")[0].innerHTML = "";
     }
 };
 
@@ -35,6 +35,7 @@ var setCartElements = (function CartElements() {
             let model = cartItems[i].model;
             let price = parseFloat(cartItems[i].cena);
             let amount = cartItems[i].amount;
+            let carIndex = cartItems[i].carIndex;
             cartElements = 
             `<!-- ITEM -->
             <div class="item">
@@ -49,7 +50,7 @@ var setCartElements = (function CartElements() {
                 <div class="item-tools">
                     <input onchange="itemSumChange(${i})" id="inputAmount${i}" class="input-amount" type="number" value="${amount}">
                     <p class="item-sum car-price">${price * amount} EUR</p>
-                    <img class="bin-icon" onclick="removeCartItem(${i})" src="https://img.icons8.com/external-tulpahn-detailed-outline-tulpahn/64/000000/external-bin-mobile-user-interface-tulpahn-detailed-outline-tulpahn.png"/>
+                    <img class="bin-icon" onclick="removeCartItem(${carIndex}, ${i})" src="https://img.icons8.com/external-tulpahn-detailed-outline-tulpahn/64/000000/external-bin-mobile-user-interface-tulpahn-detailed-outline-tulpahn.png"/>
                 </div>
             </div>
             <!-- ITEM END -->`
@@ -61,13 +62,18 @@ var setCartElements = (function CartElements() {
 })();
 
 // removes the item from page and localStorage
-function removeCartItem(itemIndex) {
-    cartItems.splice(itemIndex, 1);
-    localStorage.removeItem(`car-${itemIndex + removeCounter}`);
+function removeCartItem(carIndex, position) {
+    console.log("hi");
+    cartItems.splice(position, 1);
+    for (let i = 0; i < localStorage.length; i++) {
+        let curr = JSON.parse(localStorage.getItem(localStorage.key(i)));
+        if (curr.carIndex == carIndex) {
+            localStorage.removeItem(localStorage.key(i));
+        }
+    }
     
     emptyCartCheck();
     setCartElements();
-    removeCounter++;
 }
 
 // change individual item sum amount

@@ -90,12 +90,15 @@ let cartCounter = document.getElementById("cartCounter");
 cartCounter.innerText = localStorage.length;
 
 let boughtCars = [];
+let carIndexCounter = 1;
 
 function buyItem (dealerIndex, pickedCar){
     let car = dealersJSON[dealerIndex].automobili[pickedCar];
     car.dealerId = dealersJSON[dealerIndex].id;
     car.dealerName = dealersJSON[dealerIndex].imeAutoPlaca;
     car.amount = 1;
+    carIndexCounter ++;
+    car.carIndex = carIndexCounter;
 
     localStorage.setItem(`car-${localStorage.length+1}`, JSON.stringify(car));
     cartCounter.innerText = localStorage.length;
